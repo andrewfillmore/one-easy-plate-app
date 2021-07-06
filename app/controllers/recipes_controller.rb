@@ -15,8 +15,9 @@ class RecipesController < ApplicationController
     id = params[:id]
     recipe = HTTP.get("https://api.spoonacular.com/recipes/#{id}/information&apiKey=#{Rails.application.credentials.spoonacular_api_key}&visualizeRecipe")
 
-    render json: recipe.parse(:json)
+    render json: recipe
     
   end
 
 end
+# &apiKey=#{Rails.application.credentials.spoonacular_api_key}&visualizeRecipe
