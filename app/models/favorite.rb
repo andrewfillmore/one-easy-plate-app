@@ -3,7 +3,7 @@ class Favorite < ApplicationRecord
   def recipe
     response = HTTP.get("https://api.spoonacular.com/recipes/#{Rails.application.credentials.spoonacular_api_key}/information?includeNutrition=false")
 
-    recipe_one = response.parse(:json)
-    return recipe_one
+    recipe = response.parse(:json)
+    return recipe
   end
 end

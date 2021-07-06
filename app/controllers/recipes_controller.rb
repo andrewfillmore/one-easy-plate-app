@@ -11,11 +11,16 @@ class RecipesController < ApplicationController
     render json: recipes.parse(:json)
   end
 
-  def show
-    id = params[:id]
-    recipe = HTTP.get("https://api.spoonacular.com/recipes/#{id}/information&apiKey=#{Rails.application.credentials.spoonacular_api_key}&visualizeRecipe")
 
-    render json: recipe
+
+  def show
+    
+    # https://api.spoonacular.com/recipes/633568/information?apiKey=307f252bf4564adbbe2109e1ead5a39e&includeNutrition=true.
+    
+    id = params[:id]
+    recipe = HTTP.get("https://api.spoonacular.com/recipes/#{id}/information?apiKey=#{Rails.application.credentials.spoonacular_api_key}&visualizeRecipe")
+
+    render json: recipe.parse(:json)
     
   end
 

@@ -16,7 +16,7 @@ Rails.application.routes.draw do
 
   # Recipes
   get "/recipes", controller: "recipes", action: "index"
-  get "/recipes/:id/information", controller: "recipes", action: "show"
+  get "/recipes/:id", controller: "recipes", action: "show"
 
 
   # Sessions
