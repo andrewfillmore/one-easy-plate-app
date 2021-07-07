@@ -1,5 +1,5 @@
 class FavoritesController < ApplicationController
-  before_action :authenticate_user, except: [:index, :show]
+  before_action :authenticate_user
   
   def index
     favorites = current_user.favorites
@@ -38,9 +38,11 @@ class FavoritesController < ApplicationController
 
   def destroy
     favorite = Favorite.find(params[:id])
-    if current_user == favorite.user
+    if current_user.id == favorite.user_id
       favorite.destroy
-      render json: {message: "Recipe deleted!"}
+      render json: {message: "Recipe deleted"}
+    else
+      render json: {}, status: :unauthorized
     end
   end
 end
