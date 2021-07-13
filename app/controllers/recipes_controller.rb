@@ -20,7 +20,10 @@ class RecipesController < ApplicationController
     id = params[:id]
     recipe = HTTP.get("https://api.spoonacular.com/recipes/#{id}/information?apiKey=#{Rails.application.credentials.spoonacular_api_key}&visualizeRecipe")
 
-    render json: recipe.parse(:json)
+    already_favorite = current_user.favorites.find_by(spoonacular_api_recipe_id: id) ? true : false
+    recipe = recipe.parse(:json)
+    recipe[:already_favorite] = already_favorite
+    render json: recipe
     
   end
 
